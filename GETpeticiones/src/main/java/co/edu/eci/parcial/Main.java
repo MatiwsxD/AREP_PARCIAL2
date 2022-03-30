@@ -1,5 +1,9 @@
 package co.edu.eci.parcial;
 
+import org.json.JSONObject;
+import spark.Request;
+import spark.Response;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -7,45 +11,46 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static spark.Spark.get;
+import static spark.Spark.port;
+
 class Main {
+    private static  int cont = 0;
 
     public static void main(String[] args) {
-
-        String[] url = new String[]{"http://ec2-54-173-27-43.compute-1.amazonaws.com:3456","http://ec2-35-175-146-55.compute-1.amazonaws.com:3456"};
-        int cont = 0;
-        while (true){
-            if(cont == 0){
-                cont = 1;
-            }
-            else if(cont == 1){
-                cont = 0;
-            }
-            System.out.println("Digite la operacion (log si es logatimica o exp si es exponencial");
-            Scanner in = new Scanner(System.in);
-            String funcion = in.nextLine();
-            System.out.println("Digite el valor");
-            Scanner on = new Scanner(System.in);
-            String numero = in.nextLine();
-            String m =url[cont]+"/"+funcion+"?value=" +numero;
-            if(funcion == "exit" || numero == "exit"){
-                break;
-            }
-            else{
-                PeticionGet(m);
-            }
-
-        }
+        port(getPort());
+        get("/exp", (req, res) -> roudrobin(req, res, "exp"));
+        get("/log", (req, res) -> roudrobin(req, res, "log"));
     }
-    public static void PeticionGet(String x) {
+
+    public static String roudrobin(Request req, Response res, String operation) {
+        double number = Double.parseDouble(req.queryParams("value"));
+        String[] url = new String[]{"http://ec2-54-173-27-43.compute-1.amazonaws.com:3456", "http://ec2-35-175-146-55.compute-1.amazonaws.com:3456"};
+
+
+
+        if (cont == 0) {
+            cont = 1;
+        } else if (cont == 1) {
+            cont = 0;
+        }
+        String m = url[cont] + "/" + operation + "?value=" + number;
+        return PeticionGet(m);
+
+
+    }
+    public static String PeticionGet(String x) {
         String url = x;
         String respuesta = "";
         try {
             respuesta = peticionHttpGet(url);
-            System.out.println("La respuesta es:\n" + respuesta);
+            System.out.println("ServidorLa respuesta es:\n" + respuesta);
+            System.out.println(cont);
         } catch (Exception e) {
             // Manejar excepción
             e.printStackTrace();
         }
+        return respuesta;
     }
 
     public static String peticionHttpGet(String urlParaVisitar) throws Exception {
@@ -68,5 +73,11 @@ class Main {
         rd.close();
         // Regresar resultado, pero como cadena, no como StringBuilder
         return resultado.toString();
+    }
+    static int getPort() {
+        if (System.getenv("PORT") != null) {
+            return Integer.parseInt(System.getenv("PORT"));
+        }
+        return 4567;
     }
 }
