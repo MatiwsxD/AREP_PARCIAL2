@@ -11,7 +11,7 @@ class Main {
 
     public static void main(String[] args) {
 
-        String[] url = new String[]{"http://ec2-54-173-27-43.compute-1.amazonaws.com:","http://ec2-35-175-146-55.compute-1.amazonaws.com"};
+        String[] url = new String[]{"http://ec2-54-173-27-43.compute-1.amazonaws.com:3456","http://ec2-35-175-146-55.compute-1.amazonaws.com:3456"};
         int cont = 0;
         while (true){
             if(cont == 0){
@@ -26,7 +26,7 @@ class Main {
             System.out.println("Digite el valor");
             Scanner on = new Scanner(System.in);
             String numero = in.nextLine();
-            String m =url[cont]+"3456"+"/"+funcion+"?value=" +numero;
+            String m =url[cont]+"/"+funcion+"?value=" +numero;
             if(funcion == "exit" || numero == "exit"){
                 break;
             }
