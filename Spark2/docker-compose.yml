@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  calculadora:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: calculadora
+    ports:
+      - "35000:6000"
