@@ -133,5 +133,5 @@ class Main {
 Tenemos corriendo 3 servidores sparkweb, uno recibe la peticion, calcula a que servidor se la va a mandar y le envia una peticion get, este responde con un JSON y el proxi responde con un string que contiene el JSON
 # Video
 
-https://pruebacorreoescuelaingeduco.sharepoint.com/:v:/s/videospti/EaEocI0ppTtLjEIYq7RwxOABw4lOrVdPRSurtxm_6PgFjQ?e=gZyFky
+https://pruebacorreoescuelaingeduco.sharepoint.com/:v:/s/videospti/Ed9jqzctekxIiCOHkGnZw_QBxhoSSljdhsuakyFJ4ykSgQ?e=Uqt5fN
 
