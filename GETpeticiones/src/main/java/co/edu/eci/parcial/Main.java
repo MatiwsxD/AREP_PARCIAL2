@@ -26,8 +26,8 @@ class Main {
             System.out.println("Digite el valor");
             Scanner on = new Scanner(System.in);
             String numero = in.nextLine();
-
-            String m = "http://localhost:"+ports[cont]+"/"+funcion+"?value=" +numero;
+            String n ="ec2-54-173-27-43.compute-1.amazonaws.com"+ports[cont]+"/"+funcion+"?value=" +numero;
+            String m = "ec2-35-175-146-55.compute-1.amazonaws.com"+ports[cont]+"/"+funcion+"?value=" +numero;
             if(funcion == "exit" || numero == "exit"){
                 break;
             }
